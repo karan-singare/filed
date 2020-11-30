@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Payment } from 'src/app/dto/payment.dto';
 
+import * as fromApp from '../../store/app.reducer';
+import * as PaymentActions from './store/payment.actions';
 
 @Component({
   selector: 'app-payment-form',
@@ -11,6 +14,8 @@ import { Payment } from 'src/app/dto/payment.dto';
 export class PaymentFormComponent implements OnInit {
   paymentForm: FormGroup;
   submitted: boolean = false;
+
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.paymentForm = new FormGroup({
@@ -72,6 +77,9 @@ export class PaymentFormComponent implements OnInit {
     this.submitted = true;
     let payment: Payment = this.paymentForm.value;
     console.log(payment);
+
+    this.store.dispatch(new PaymentActions.AddPayment(payment));
+
     if (this.paymentForm.valid) {
       // let card: CreditCard = this.paymentForm.value;
       // this.paymentService.createAndStorePayment(payment);
