@@ -1,5 +1,16 @@
 <div class="container">
   <div class="offset-md-3 col-md-6">
+
+    <div class="information" *ngIf="message">
+      <div class="alert alert-primary">
+        <ul>
+          <li>The form is submitted successfully.</li>
+          <li>Payment data is stored in the state as well as database.</li>
+          <li>To see the data stored in the state navigate to home page.</li>
+        </ul>
+      </div>
+    </div>
+
     <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="creditCardNumber">Credit Card Number</label>
@@ -72,10 +83,6 @@
         class="form-text text-muted error"
         *ngIf="isRequired('amount')">Amount is required</small>
         <small id="amountHelp" class="form-text text-muted"></small>
-      </div>
-
-      <div>
-        <h6 class="help-block error" *ngIf="isInvalidFromSubmitted()">Please enter valid data!</h6>
       </div>
 
       <button type="submit" class="btn btn-primary">Pay</button>

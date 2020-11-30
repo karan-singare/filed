@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PaymentService } from 'src/app/services/payment.service';
 import { Payment } from '../../dto/payment.dto';
 
 import * as fromApp from '../../store/app.reducer';
 import * as PaymentActions from './store/payment.actions';
+
 
 @Component({
   selector: 'app-payment-form',
@@ -15,10 +16,11 @@ import * as PaymentActions from './store/payment.actions';
 export class PaymentFormComponent implements OnInit {
   paymentForm: FormGroup;
   submitted: boolean = false;
+  message: string = null;
 
   constructor(
-    private store: Store<fromApp.AppState>,
-    private paymentService: PaymentService
+    private paymentService: PaymentService,
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit() {
@@ -73,15 +75,22 @@ export class PaymentFormComponent implements OnInit {
     }
   }
 
-  isInvalidFromSubmitted(): boolean {
-    return this.paymentForm.invalid && this.submitted;
-  }
-
   onSubmit() {
     this.submitted = true;
     if (this.paymentForm.valid) {
       let payment: Payment = this.paymentForm.value;
-      this.paymentService.createAndStorePayment(payment);
+      this.paymentService.createAndStorePayment(payment)
+      .subscribe(
+        responseData => {
+          this.message = "success";
+          this.store.dispatch(new PaymentActions.AddPayment(payment));
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+      this.paymentForm.reset();
     }
   }
 

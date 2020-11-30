@@ -15,7 +15,6 @@ export function PaymentReducer(
 ) {
   switch (action.type) {
     case PaymentActions.ADD_PAYMENT:
-      console.log(action.payload);
       const payment: Payment = {
         ...action.payload
       };
