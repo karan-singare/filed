@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="offset-md-3 col-md-6">
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="creditCardNumber">Credit Card Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="creditCardNumber"
+          aria-describedby="creditCardNumberHelp"
+          placeholder="Enter credit card number"
+          formControlName="creditCardNumber">
+        <small
+        id="creditCardNumberHelp"
+        class="form-text text-muted error"
+        *ngIf="isRequired('creditCardNumber')">Credit card number is required</small>
+      </div>
+      <div class="form-group">
+        <label for="cardHolder">Card Holder</label>
+        <input
+          type="text"
+          class="form-control"
+          id="cardHolder"
+          aria-describedby="cardHolderHelp"
+          placeholder="Enter card holder name"
+          formControlName="cardHolder">
+          <small
+          id="cardHolderHelp"
+          class="form-text text-muted error"
+          *ngIf="isRequired('cardHolder')">Credit holder name is required</small>
+      </div>
+      <div class="form-group">
+        <label for="expirationDate">Expiration Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="expirationDate"
+          aria-describedby="expirationDateHelp"
+          placeholder="Select Expiration Month and Year"
+          formControlName="expirationDate">
+        <small
+        id="expirationDateHelp"
+        class="form-text text-muted error"
+        *ngIf="isRequired('expirationDate')">Expiration date is required</small>
+        <small
+          id="expirationDateHelp"
+          class="form-text text-muted error"
+          *ngIf="isInvalid('expirationDate')">Expiration date must be greater than current date</small>
+      </div>
+      <div class="form-group">
+        <label for="securityCode">Security Code - CVV</label>
+        <input
+          type="text"
+          class="form-control"
+          id="securityCode"
+          aria-describedby="securityCodeHelp"
+          placeholder="Enter security code - CVV"
+          formControlName="securityCode">
+        <small id="securityCodeHelp" class="form-text text-muted"></small>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input
+          type="number"
+          class="form-control"
+          id="amount"
+          aria-describedby="amountHelp"
+          placeholder="Enter amount"
+          formControlName="amount">
+        <small
+        id="amountHelp"
+        class="form-text text-muted error"
+        *ngIf="isRequired('amount')">Amount is required</small>
+        <small id="amountHelp" class="form-text text-muted"></small>
+      </div>
+
+      <div>
+        <h6 class="help-block error" *ngIf="isInvalidFromSubmitted()">Please enter valid data!</h6>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
+
+  </div>
+</div>
