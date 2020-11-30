@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PaymentFormComponent } from './payments/payment-form/payment-form.component';
-import { PaymentListComponent } from './payments/payment-list/payment-list.component';
+import { PaymentFormComponent } from './payment/payment-form/payment-form.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
-  {path: '', component: PaymentListComponent},
+  {path: '', component: PaymentComponent},
   {path: 'pay', component: PaymentFormComponent},
 ];
 

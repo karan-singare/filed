@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="information" *ngIf="!payment">
+      <div class="alert alert-primary">
+        <ul>
+          <li>There is nothing inside the payment state of this application.</li>
+          <li>To see the payment information make a payment using the link provided in navbar.</li>
+          <li>Then comeback here, clicking the home link provided in navbar.</li>
+          <li>You will be able to see the payment details stored in the state.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="isFetched && payment">
+      <table class="table table-bordered">
+         <caption>The payment details stored in the state of the application</caption>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Credit Card Number</th>
+            <th scope="col">Card Holder Name</th>
+            <th scope="col">Expiration Date</th>
+            <th scope="col">Security Code - CVV</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td> {{ payment.creditCardNumber }} </td>
+            <td> {{ payment.cardHolder }} </td>
+            <td> {{ payment.expirationDate }} </td>
+            <td> {{ payment.securityCode }} </td>
+            <td> {{ payment.amount }} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

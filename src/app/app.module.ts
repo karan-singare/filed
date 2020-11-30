@@ -3,25 +3,25 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { PaymentsComponent } from './payments/payments.component';
+import { PaymentComponent } from './payment/payment.component';
 import { HeaderComponent } from './header/header.component';
-import { PaymentListComponent } from './payments/payment-list/payment-list.component';
-import { PaymentFormComponent } from './payments/payment-form/payment-form.component';
+import { PaymentFormComponent } from './payment/payment-form/payment-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as fromApp from './store/app.reducer';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentsComponent,
+    PaymentComponent,
     HeaderComponent,
-    PaymentListComponent,
     PaymentFormComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(fromApp.appReducer),
     AppRoutingModule
